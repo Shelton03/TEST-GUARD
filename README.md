@@ -181,3 +181,19 @@ Response returned to user
 | `502 LLM call failed` | Check `OPENAI_API_KEY` and `AIGUARD_API_KEY` in `.env` |
 | No traces in dashboard | Make sure `aiguard dev` is running before the server |
 | Connection refused on port 8002 | Make sure `uvicorn main:app --reload --port 8002` is running |
+
+---
+
+## CI / GitHub Actions
+
+AIGuard evaluation runs automatically on every push and pull request via `.github/workflows/aiguard-eval.yml`.
+
+**Requirements:**
+- Set the `OPENAI_API_KEY` secret in your repository settings (Settings → Secrets and variables → Actions)
+
+**What it does:**
+1. Installs `aiguard-safety` and app dependencies
+2. Runs `aiguard evaluate --project llm_test`
+3. Uploads the AIGuard report as the `aiguard-report` artifact (retained for 30 days)
+
+The evaluation step uses `continue-on-error: true` so the artifact still uploads even if evaluation fails.

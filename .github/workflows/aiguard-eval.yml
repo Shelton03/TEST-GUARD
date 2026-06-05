@@ -1,0 +1,32 @@
+name: AIGuard Evaluation
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  aiguard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - name: Install AIGuard
+        run: pip install aiguard-safety
+      - name: Install app dependencies
+        run: pip install -r requirements.txt
+      - name: Run evaluation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: aiguard evaluate --project llm_test
+        continue-on-error: true
+      - name: Upload AIGuard report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: aiguard-report
+          path: .aiguard/reports/
+          if-no-files-found: warn
+          retention-days: 30
