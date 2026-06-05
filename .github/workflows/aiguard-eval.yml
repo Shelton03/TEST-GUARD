@@ -17,6 +17,15 @@ jobs:
         run: pip install aiguard-safety
       - name: Install app dependencies
         run: pip install -r requirements.txt
+      - name: Verify API key is set
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -z "$OPENAI_API_KEY" ]; then
+            echo "❌ OPENAI_API_KEY is not set"
+            exit 1
+          fi
+          echo "✅ API key is present (length: ${#OPENAI_API_KEY})"
       - name: Run evaluation
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
