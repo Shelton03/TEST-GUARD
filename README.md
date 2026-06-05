@@ -170,7 +170,7 @@ OpenAI API  (underlying LLM provider)
  ▼
 Response returned to user
 ```
-
+GGGGG
 ---
 
 ## Troubleshooting
