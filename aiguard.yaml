@@ -61,7 +61,15 @@ pipeline:
     evaluation_batch_interval_hours: 3
     max_batch_size: 3
     enable_hallucination_eval: true
-    enable_adversarial_eval: false
+    enable_adversarial_eval: true
     project_id: ""
+    # Human Review Queue (auto-trigger)
+    review:
+        enabled: true          # Set to true to enable auto-trigger
+        sample_rate: 0.50         # 20% random sampling (0.0-1.0)
+        high_score_threshold: 0.6  # Review scores >= this (null = disabled)
+        low_score_threshold: 0.0   # Review scores <= this (null = disabled)
+        send_email: true          # Send email notifications to reviewers
+
 
 storage: sqlite
