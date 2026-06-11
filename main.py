@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 # Load environment variables from .env
 load_dotenv()
 
+
 # ── AI Guard SDK – one-time configuration ────────────────────────────────────
 # sampling_rate=1.0 → trace every request (good for testing)
 # Reads aiguard.yaml from CWD if present; CLI overrides take priority.
@@ -59,7 +60,7 @@ async def chat(request: ChatRequest):
     if not request.message.strip():
         raise HTTPException(status_code=400, detail="Message must not be empty.")
 
-    model = os.getenv("LLM_MODEL", "gpt-4o-mini")
+    model = os.getenv("LLM_MODEL", "gpt-5.2")
 
     try:
         response = aiguard.chat(
