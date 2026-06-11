@@ -40,8 +40,7 @@ review:
 smtp:
     host: "smtp.gmail.com"
     port: 587
-    user: "simbanegayim@gmail.com"              # SMTP username
-    password: "dcdurxbsdlpfdgrg"          # Or use env var: AIGUARD_SMTP_PASSWORD
+    user: "simbanegayim@gmail.com"              
     from: "simbanegayim@gmail.com"
     to:
         - "sheltonmutambirwa@gmail.com"
